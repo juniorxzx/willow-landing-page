@@ -1,95 +1,218 @@
+'use client'
+
+import {
+  About, Box, Button,
+  Card, Contact, Content,
+  Fieldset, Form, Hero,
+  Input, Label, Main,
+  SectionTitle, SubTitle, Testimonials,
+  TestimonialsCards, Title, Socials,
+  LinkStyled, BoxImages
+} from "./page.styled";
+import { TestimonialsUser as Comments } from '@/testimonials'
+
 import Image from "next/image";
-import styles from "./page.module.css";
+import { useState } from "react";
+import { IoLogoInstagram, IoLogoFacebook, IoLogoLinkedin } from "react-icons/io5";
+
+import Image1 from '../assets/bg-1-hero.jpg'
+import Image2 from '../assets/bg-2-hero.jpg'
 
 export default function Home() {
+  const [isFloating, setIsFloating] = useState({
+    name: false,
+    email: false,
+    number: false,
+  });
+
+  const handleFocus = (id: string) => {
+    setIsFloating((prevState) => ({
+      ...prevState,
+      [id]: true,
+    }));
+  };
+
+  const handleBlur = (id: string, e: any) => {
+    if (!e.target.value) {
+      setIsFloating((prevState) => ({
+        ...prevState,
+        [id]: false,
+      }));
+    }
+  };
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <Main>
+      <Hero>
+        <Box>
+          <Title>
+            <span>Will</span>
+            <span>ow</span>
+          </Title>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+          <SubTitle>
+            Ignite your creativity with Willow.
+            Discover endless inspiration and tools to bring your ideas to life.
+            Join us and start your creative journey today.
+          </SubTitle>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+          <Button>
+            Explore 🌍
+          </Button>
+        </Box>
+        <BoxImages>
+          <Image src={Image1} alt="" width={300} height={300} />
+          <Image src={Image2} alt="" width={300} height={300} />
+        </BoxImages>
+      </Hero>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+      <About>
+        <Content>
+          <SectionTitle>
+            About Us
+          </SectionTitle>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
+          <div className="text-about">
+            Willow Digital Agency drives online business success through
+            innovative solutions. Our experienced team combines design, web
+            development, digital marketing, and strategy to deliver tailored
+            services that achieve impressive results. Committed to staying at the
+            forefront of digital innovation, we ensure our clients stand out in
+            an ever-evolving digital marketplace
+          </div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+
+          <div className="cards">
+            <div className="card">
+              <div className="c-content">
+                <h1>Improve your business</h1>
+                <span>
+                  We help you improve your business, bringing good results
+                </span>
+                <div className="">
+
+                </div>
+              </div>
+            </div>
+            <div className="card">
+              <div className="c-content">
+                <h1>Making things better</h1>
+                <span>
+                  Discover a new way to attract new customers
+                </span>
+
+                <Button>
+                  Discover Now 🚀
+                </Button>
+              </div>
+
+            </div>
+
+          </div>
+        </Content>
+      </About>
+
+      <Testimonials>
+        <Content>
+          <SectionTitle>
+            Testimonials
+          </SectionTitle>
+          <TestimonialsCards>
+            {Comments.map((user, index) => (
+              <Card key={index}>
+                <div className="card-header">
+                  <div className="user-details">
+                    <span>{user.name}</span>
+                    <span>{user.role}</span>
+                  </div>
+                </div>
+                <div className="card-body">
+                  <span>
+                    "{user.comment}"
+                  </span>
+                </div>
+
+              </Card>
+            ))}
+          </TestimonialsCards>
+        </Content>
+      </Testimonials>
+
+      <Contact>
+        <Content>
+
+          <div className="text-about">
+            <span>Get in Touch</span>
+            <span>
+              <p>We are here for you. </p>
+              <p>How can we help you?</p>
+            </span>
+          </div>
+          <div>
+            <Form>
+              <Fieldset>
+                <Label $isFloating={isFloating.name}>
+                  Name
+                </Label>
+                <Input
+                  type="text"
+                  id="name"
+                  onFocus={() => handleFocus('name')}
+                  onBlur={(e) => handleBlur('name', e)}
+                />
+              </Fieldset>
+              <Fieldset>
+                <Label $isFloating={isFloating.email}>
+                  Email
+                </Label>
+                <Input
+                  type="email"
+                  id="email"
+                  onFocus={() => handleFocus('email')}
+                  onBlur={(e) => handleBlur('email', e)}
+                />
+              </Fieldset>
+              <Fieldset>
+                <Label $isFloating={isFloating.number}>
+                  Number
+                </Label>
+                <Input
+                  type="text"
+                  id="number"
+                  onFocus={() => handleFocus('number')}
+                  onBlur={(e) => handleBlur('number', e)}
+                />
+              </Fieldset>
+
+              <Button>
+                Send
+              </Button>
+            </Form>
+
+            <Socials>
+              <div className="social-link">
+                <LinkStyled href={'/'}>
+                  <IoLogoInstagram size={24} />
+                  <span>Instagram</span>
+                </LinkStyled>
+              </div>
+              <div>
+                <LinkStyled href={'/'}>
+                  <IoLogoFacebook size={24} />
+                  <span>Facebook</span>
+                </LinkStyled>
+              </div>
+              <div>
+                <LinkStyled href={'/'}>
+                  <IoLogoLinkedin size={24} />
+                  <span>Linkedin</span>
+                </LinkStyled>
+              </div>
+            </Socials>
+          </div>
+
+        </Content>
+      </Contact>
+
+    </Main>
   );
 }
