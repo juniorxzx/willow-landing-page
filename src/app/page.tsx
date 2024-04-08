@@ -127,7 +127,7 @@ export default function Home() {
                 </div>
                 <div className="card-body">
                   <span>
-                    "{user.comment}"
+                    &quot;{user.comment}&quot;
                   </span>
                 </div>
 
